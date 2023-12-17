@@ -18,7 +18,8 @@ export const post = async (req, res) => {
       return;
     }
 
-    if (await bcrypt.compare(password, user.password)) {      
+    if (await bcrypt.compare(password, user.password)) {
+      req.session.user = {login: user.login, admin: user.admin}; // Assuming you have a session middleware
       res.redirect('/');
     } else {
       // Password is incorrect, redirect to an error page or handle as needed

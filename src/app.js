@@ -1,8 +1,6 @@
 import createRouter from 'express-file-routing';
 import { config } from 'dotenv';
 import path from "path";
-import passport from 'passport';
-import flash from 'connect-flash';
 import { fileURLToPath } from "url";
 import app from './config/express.js';
 import session from './config/session.js';
@@ -17,9 +15,6 @@ const PORT = process.env.PORT || 3000;
 
 // Configurando o middleware de sessão
 app.use(session);
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(flash());
 
 // Configura o express-file-routing
 await createRouter(app);
@@ -28,6 +23,6 @@ await createRouter(app);
 app.listen(PORT, () => {
   console.log(`
   Link de cadastro: http://localhost:${PORT}/cadastro
-  LInk para login:  http://localhost:${PORT}/login
+  Link para login:  http://localhost:${PORT}/login
    `);
 });

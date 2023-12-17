@@ -37,7 +37,8 @@ export const post = async (req, res) => {
         }
 
         // Hash da senha antes de salvar no banco de dados
-        const hash = await bcrypt.hash(senha, 10);        
+        const hash = await bcrypt.hash(senha, 10);
+        
         usuario.senha = hash;
         // Insere o usuário no banco de dados
         const userId = await insertUsuario(usuario);        
