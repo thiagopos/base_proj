@@ -1,0 +1,39 @@
+<!-- cadastrar.ejs -->
+
+<html>
+<head>
+    <title>Cadastrar</title>
+</head>
+<body>
+    <h2>Cadastrar</h2>
+    <form action="/cadastro" method="post">
+        <label for="login">Login:</label>
+        <input type="text" id="login" name="login" minlength="7" maxlength="7" required>
+        <br>
+        <label for="senha">Senha:</label>
+        <input type="password" id="senha" name="senha" minlength="6" maxlength="15" required>
+        <br>
+        <label for="confirmarSenha">Confirmar Senha:</label>
+        <input type="password" id="confirmarSenha" name="confirmarSenha" minlength="6" maxlength="15" required>
+        <br>
+        <label for="admin">Admin:</label>
+        <input type="checkbox" id="admin" name="admin">
+        <br>
+        <button type="submit" onclick="return validarSenhas()">Cadastrar</button>
+    </form>
+
+    <script>
+        function validarSenhas() {
+            let senha = document.querySelector("#senha").value;
+            let confirmarSenha = document.querySelector("#confirmarSenha").value;
+
+            if (senha !== confirmarSenha) {
+                alert("As senhas não coincidem. Por favor, digite novamente.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</body>
+</html>
