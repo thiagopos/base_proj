@@ -24,5 +24,6 @@ app.listen(PORT, () => {
   console.log(`
   Link de cadastro: http://localhost:${PORT}/cadastro
   Link para login:  http://localhost:${PORT}/login
+  Link para API:    http://localhost:${PORT}/api/data
    `);
 });

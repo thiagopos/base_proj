@@ -1,10 +1,8 @@
-// Importando as bibliotecas necessárias
-import dotenv from 'dotenv'; // Biblioteca para carregar variáveis de ambiente
-import mysql from 'mysql2/promise'; // Biblioteca para conexão com o banco de dados MySQL
-dotenv.config({ path: "./.env" }); // Carrega as variáveis de ambiente do arquivo .env
+import dotenv from 'dotenv';
+import mysql from 'mysql2/promise';
+dotenv.config({ path: "./.env" });
 
-// Função responsável por estabelecer a conexão com o banco de dados
-export const connect = async () => {
+export async function connect() {
   if (global.connection && global.connection.state !== "disconnected")
     return global.connection;
 
@@ -18,5 +16,5 @@ export const connect = async () => {
   global.connection = connection;
 
   return connection;
-};
+}
 

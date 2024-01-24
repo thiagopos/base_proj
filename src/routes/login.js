@@ -1,26 +1,31 @@
-import bcrypt from 'bcrypt';
-import { getUserByLogin } from '../models/queries/authenticationQueries.js'; // Substitua pelo caminho correto
+import bcrypt from "bcrypt";
+import { obterUsuarioPorLogin } from "../models/queries/consultasAutenticacao.js"; // Substitua pelo caminho correto
 
-export const get = (req, res) => {
-  res.render('login'); // Assuming you have a login view
-};
+export function get(req, res) {
+  res.render("login"); // Assuming you have a login view
+}
 
-export const post = async (req, res) => {
-  const { login, senha: password } = req.body;
+export async function post(req, res) {
+  const usuario = req.body;
 
   try {
     // Check if the user exists in the database
-    const user = await getUserByLogin(login);
+    const usuarioValidado = await obterUsuarioPorLogin(usuario.login_sms);
 
-    if (!user) {
+    if (!usuarioValidado) {
       // User does not exist, redirect to an error page or handle as needed
-      res.redirect('/error');
+      res.redirect("/error");
       return;
     }
 
-    if (await bcrypt.compare(password, user.password)) {
-      req.session.user = {login: user.login, admin: user.admin}; // Assuming you have a session middleware
-      res.redirect('/');
+    if (bcrypt.compare(usuario.senha, usuarioValidado.senha)) {
+      req.session.usuario = {
+        id_usuario: usuarioValidado.id_usuario,
+        login_sms: usuarioValidado.login_sms,
+        nome_completo: usuarioValidado.nome_completo
+      };
+      
+      res.redirect("/");
     } else {
       // Password is incorrect, redirect to an error page or handle as needed
       res.status(400).send("Senha incorreta");
@@ -28,6 +33,6 @@ export const post = async (req, res) => {
   } catch (error) {
     // Handle errors as needed
     console.error(error);
-    res.redirect('/error');
+    res.redirect("/error");
   }
-};
+}

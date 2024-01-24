@@ -1,8 +1,9 @@
-import validate from "../middleware/validate.js";
+import validarUsuario from "../middleware/validarUsuario.js";
 
-export const get = async (req, res) => {
-  if(await validate(req.session.user, true))
-    res.render('dashboard'); // Assuming you have a login view
+export async function get(req,res) {
+  const usuario = req.session.usuario
+  if(await validarUsuario(usuario))
+    res.render('index', { usuario }); 
   else
     res.status(401).send("Usuário não autenticado!");  
 };
