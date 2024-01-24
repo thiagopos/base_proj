@@ -8,8 +8,8 @@ export default async function validarUsuario(usuario) {
       const usuarioValidado = await obterUsuarioPorLogin(usuario.login_sms);  
 
       if (!usuarioValidado)
-        return false;    
-        
+        return false;
+
       return true;
       
     } catch (error) {

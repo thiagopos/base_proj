@@ -5,6 +5,7 @@ import { fileURLToPath } from "url";
 import app from './config/express.js';
 import session from './config/session.js';
 
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 

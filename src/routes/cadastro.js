@@ -19,9 +19,9 @@ export async function post(req,res) {
         await usuarioSchema.validate(usuario);
 
         // Verificar se o usuário já existe no banco de dados
-        const userExists = await checkUserExists(usuario.login_sms);
+        const usuarioExistente = await usuarioExiste(usuario.login_sms);
 
-        if (userExists) {
+        if (usuarioExistente) {
             // Usuário já existe, redirecione para uma página de erro ou trate conforme necessário
             res.redirect('/error');
             return;
