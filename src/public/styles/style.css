@@ -1,0 +1,23 @@
+/* Seu estilo CSS ajustado para um footer mais discreto */
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+footer {
+  background-color: #333;
+  color: #fff;
+  padding: 1px 0; /* Reduz o padding para torná-lo mais compacto */
+  text-align: center;
+  margin-top: auto;
+  font-size: 0.8em; /* Diminui o tamanho da fonte */
+}
+

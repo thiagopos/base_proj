@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Base</title>
-</head>
-<body>
+<%- include('./partials/head.ejs') %>
   <h1>Usuário logado</h1>
   <p><%= usuario.nome_completo %></p>
   <a href="/logout">logout</a>
-</body>
-</html>
+  <%- include('./partials/footer.ejs') %>
