@@ -26,8 +26,4 @@ app.use((req, res, next) => {
   next();
 });
 
-
-// TESTAR ISSO AMANHA CARA LINDA
-
-
 export default app;

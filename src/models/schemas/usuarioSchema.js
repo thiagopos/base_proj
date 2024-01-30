@@ -1,5 +1,6 @@
 import * as yup from 'yup';
 
+// Esquema de validação para objetos de usuário usando a biblioteca Yup.
 export const usuarioSchema = yup.object({
   login_sms: yup.string().nullable().max(7),
   nome_completo: yup.string().nullable().max(100),

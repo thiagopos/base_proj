@@ -8,15 +8,20 @@ import {
   obterTiposUsuario,
 } from "../models/queries/consultasAutenticacao.js";
 
-
 // Renderiza a página de cadastro com informações sobre tipos de usuários e cargos.
 export async function get(req, res) {
-  // Obtém tipos de cargos e tipos de usuários do banco de dados
-  const tiposCargos = await obterCargosUsuario();
-  const tiposUsuarios = await obterTiposUsuario();
+  try {
+    // Obtém tipos de cargos e tipos de usuários do banco de dados
+    const tiposCargos = await obterCargosUsuario();
+    const tiposUsuarios = await obterTiposUsuario();
 
-  // Renderiza a página de cadastro com as informações obtidas
-  res.render("cadastro.ejs", { tiposUsuarios, tiposCargos });
+    // Renderiza a página de cadastro com as informações obtidas
+    res.render("cadastro.ejs", { tiposUsuarios, tiposCargos });
+  } catch (error) {
+    // Trata os erros conforme necessário
+    console.error("Erro ao processar a requisição de cadastro:", error);
+    res.status(500).send("Erro interno do servidor");
+  }
 }
 
 // Processa a submissão do formulário de cadastro de usuário.
@@ -32,7 +37,7 @@ export async function post(req, res) {
 
     if (usuarioExistente) {
       // Usuário já existe, redireciona para uma página de erro ou trata conforme necessário
-      enviarMensagem(req, 'ERRO', 'Usuário já cadastrado.')
+      enviarMensagem(req, 'ERRO', 'Usuário já cadastrado.');
       res.redirect("/cadastro");
       return;
     }
@@ -47,11 +52,12 @@ export async function post(req, res) {
     const userId = await inserirUsuario(usuario);
     
     // Se a inserção for bem-sucedida, redireciona para a página de login
-    enviarMensagem(req, 'SUCESSO', 'Usuário cadastrado com sucesso.')
+    enviarMensagem(req, 'SUCESSO', 'Usuário cadastrado com sucesso.');
     res.redirect("/login");
   } catch (error) {
     // Trata os erros conforme necessário
-    enviarMensagem(req, 'ERRO', 'Erro ao tentar cadastrar usuário.')
+    console.error("Erro ao tentar cadastrar usuário:", error);
+    enviarMensagem(req, 'ERRO', 'Erro ao tentar cadastrar usuário.');
     res.redirect("/login");
   }
 }

@@ -4,8 +4,15 @@ import { enviarMensagem } from "./api/mensagens.js";
 
 // Renderiza a página de login.
 export function get(req, res) {
-  res.render("login");
+  try {
+    res.render("login");
+  } catch (error) {
+    // Trata os erros conforme necessário
+    console.error("Erro ao processar a requisição GET para a página de login:", error);
+    res.status(500).send("Erro interno do servidor");
+  }
 }
+
 
 // Processa a submissão do formulário de login.
 export async function post(req, res) {
