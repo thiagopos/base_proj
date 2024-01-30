@@ -1,11 +1,13 @@
 import bcrypt from "bcrypt";
 import { usuarioSchema } from "../models/schemas/usuarioSchema.js";
+import { enviarMensagem } from "./api/mensagens.js";
 import {
   inserirUsuario,
   usuarioExiste,
   obterCargosUsuario,
   obterTiposUsuario,
 } from "../models/queries/consultasAutenticacao.js";
+
 
 // Renderiza a página de cadastro com informações sobre tipos de usuários e cargos.
 export async function get(req, res) {
@@ -30,7 +32,8 @@ export async function post(req, res) {
 
     if (usuarioExistente) {
       // Usuário já existe, redireciona para uma página de erro ou trata conforme necessário
-      res.redirect("/error");
+      enviarMensagem(req, 'ERRO', 'Usuário já cadastrado.')
+      res.redirect("/cadastro");
       return;
     }
 
@@ -42,12 +45,13 @@ export async function post(req, res) {
 
     // Insere o usuário no banco de dados
     const userId = await inserirUsuario(usuario);
-
+    
     // Se a inserção for bem-sucedida, redireciona para a página de login
+    enviarMensagem(req, 'SUCESSO', 'Usuário cadastrado com sucesso.')
     res.redirect("/login");
   } catch (error) {
     // Trata os erros conforme necessário
-    console.error(error);
-    res.redirect("/error");
+    enviarMensagem(req, 'ERRO', 'Erro ao tentar cadastrar usuário.')
+    res.redirect("/login");
   }
 }
