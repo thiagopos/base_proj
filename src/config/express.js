@@ -29,20 +29,5 @@ app.use((req, res, next) => {
 
 // TESTAR ISSO AMANHA CARA LINDA
 
-/* // Middleware para manipulação de cache após o logout
-app.use((req, res, next) => {
-  // Verificar se o usuário está autenticado
-  const isAuthenticated = req.session && req.session.userId;
 
-  // Configurar cabeçalhos de cache com base no estado de autenticação
-  if (isAuthenticated) {
-    res.header('Cache-Control', 'private, no-store, no-cache, must-revalidate');
-    res.header('Expires', '-1');
-  } else {
-    res.header('Cache-Control', 'public, max-age=0');
-    res.header('Expires', '0');
-  }
-
-  next();
-}); */
 export default app;

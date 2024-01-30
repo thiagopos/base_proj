@@ -3,7 +3,7 @@ async function atualizarMensagem() {
   
   try {
     // Realiza um fetch para a API
-    const response = await fetch('/api/mensagem');
+    const response = await fetch('/api/mensagens');
 
     // Verifica se a resposta foi bem-sucedida (código 2xx)
     if (response.ok) {

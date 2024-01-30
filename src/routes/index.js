@@ -1,4 +1,5 @@
 import validarUsuario from "../middleware/validarUsuario.js";
+import { enviarMensagem } from "./api/mensagens.js";
 
 // Manipula a solicitação GET para a página principal, renderizando a página index se o usuário estiver autenticado.
 export async function get(req, res) {
@@ -10,7 +11,8 @@ export async function get(req, res) {
     // Se o usuário for válido, renderiza a página index com as informações do usuário
     res.render('index', { usuario });
   } else {
-    // Se o usuário não for válido, retorna um status 401 e uma mensagem de erro
-    res.status(401).send("Usuário não autenticado!");
+    // Se o usuário não for válido, retorna para a página de login    
+    enviarMensagem(req, 'ALERTA', 'Necessário fazer login.')    
+    res.redirect("/login");    
   }
 };
